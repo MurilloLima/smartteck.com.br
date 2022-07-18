@@ -35,12 +35,16 @@
 </head>
 
 <body class="Home">
-    <div>
-        @include('home.inc.header')
-        @include('home.inc.nav')
-        @yield('content')
-        @include('home.inc.footer')
+    <div class="totopshow">
+        <a href="#" class="back-to-top"><img src="{{ asset('home/images/gototop0.png') }}" /></a>
     </div>
+
+    @include('home.inc.header')
+    @include('home.inc.nav')
+
+    @yield('content')
+   
+    @include('home.inc.footer')
 
     <script type="text/javascript">
         WebFontConfig = {

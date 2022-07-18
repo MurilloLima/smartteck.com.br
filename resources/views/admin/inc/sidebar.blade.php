@@ -39,7 +39,13 @@
                 <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-home"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.mensagem') }}" class="nav-link">
                         <i class="nav-icon fa fa-book"></i>
                         <p>
                             Mensagem
@@ -47,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.clientes') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Clientes
@@ -55,7 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.noticias') }}" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Noticias
@@ -65,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.quem-somos') }}" class="nav-link">
                         <i class="nav-icon fa fa-clock"></i>
                         <p>
                             Quem somos

@@ -27,9 +27,26 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('admin.index');
 require __DIR__ . '/auth.php';
 
+Route::get('/mensagem', function () {
+    return view('admin.pages.message');
+})->middleware(['auth'])->name('admin.mensagem');
+
+Route::get('/clientes', function () {
+    return view('admin.pages.clientes');
+})->middleware(['auth'])->name('admin.clientes');
+
+Route::get('/noticias', function () {
+    return view('admin.pages.noticias');
+})->middleware(['auth'])->name('admin.noticias');
+
+Route::get('/quem-somos', function () {
+    return view('admin.pages.quem-somos');
+})->middleware(['auth'])->name('admin.quem-somos');
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home.index');
     Route::get('contact', 'contact')->name('home.contact');
+    Route::post('contact/', 'store')->name('contact.store');
 
     // Route::post('clientes', 'store')->name('clientes.store')->middleware(['auth']);
     // Route::get('clientes/create', 'create')->name('clientes.create')->middleware(['auth']);
