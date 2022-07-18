@@ -13,7 +13,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        Smart Teck
+        Smart Teck - @yield('title')
     </title>
     <link rel="stylesheet" href="{{ asset('home/assets/css/bootstrap.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('home/assets/css/style.css') }}" type="text/css" media="screen" />

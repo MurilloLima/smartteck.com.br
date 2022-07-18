@@ -30,7 +30,7 @@
             </div>
             <div class="menu-center collapse navbar-collapse">
                 <ul class="ttr_menu_items nav navbar-nav navbar-right">
-                    <li class="ttr_menu_items_parent dropdown active"><a href="home.html"
+                    <li class="ttr_menu_items_parent dropdown active"><a href="{{ route('home.index') }}"
                             class="ttr_menu_items_parent_link_active"><span class="menuchildicon"></span>Home</a>
                         <hr class="horiz_separator" />
                     </li>
@@ -42,14 +42,14 @@
                             class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Serviços</a>
                         <hr class="horiz_separator" />
                     </li>
-                    <li class="ttr_menu_items_parent dropdown"><a href="training.html"
+                    <li class="ttr_menu_items_parent dropdown"><a href="#"
                             class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Blog</a>
                         <hr class="horiz_separator" />
                     </li>
                     <li class="ttr_menu_items_parent dropdown"><a href="contact.html"
                             class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Negocie aqui</a>
                         <hr class="horiz_separator" />
-                    <li class="ttr_menu_items_parent dropdown"><a href="contact.html"
+                    <li class="ttr_menu_items_parent dropdown"><a href="{{ route('home.contact') }}"
                             class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Fale conosco</a>
                         <hr class="horiz_separator" />
                     </li>
