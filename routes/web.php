@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +24,10 @@ Route::get('/', function () {
 
 //admin
 Route::get('/dashboard', function () {
-    return view('admin.pages.index');
-})->middleware(['auth'])->name('admin.index');
-require __DIR__ . '/auth.php';
+    return view('admin.pages.slider.index');
+})->middleware(['auth'])->name('admin.slider.index');
+
+Route::post('slider/store/', [SliderController::class, 'store'])->name('admin.slider.store');
 
 Route::get('/mensagem', function () {
     return view('admin.pages.message');
@@ -55,3 +57,4 @@ Route::controller(HomeController::class)->group(function () {
     // Route::delete('clientes/{item}', 'destroy')->name('clientes.destroy')->middleware(['auth']);
     // Route::get('clientes/{item}/edit', 'edit')->name('clientes.edit')->middleware(['auth']);
 });
+require __DIR__ . '/auth.php';

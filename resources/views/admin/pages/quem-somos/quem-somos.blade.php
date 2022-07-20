@@ -1,36 +1,39 @@
 @extends('admin.layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Quem somos')
+
 @section('content')
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="min-height: 234px;">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div><!-- /.col -->
+                        <h1>Quem somos</h1>
+                    </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item"><a href="#">Cadastrar</a></li>
+                            {{-- <li class="breadcrumb-item active">Fixed Layout</li> --}}
                         </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                    </div>
+                </div>
             </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+        </section>
 
         <!-- Main content -->
         <section class="content">
+
             <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        Agenda
+                        <table>
+                            <tbody></tbody>
+                            
+                        </table>
                     </div>
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
         <!-- /.content -->
     </div>
