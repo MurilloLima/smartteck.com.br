@@ -42,8 +42,8 @@
                             class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Serviços</a>
                         <hr class="horiz_separator" />
                     </li>
-                    <li class="ttr_menu_items_parent dropdown"><a href="#"
-                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Blog</a>
+                    <li class="ttr_menu_items_parent dropdown"><a href="{{ route('home.noticias.pages') }}"
+                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Noticicas</a>
                         <hr class="horiz_separator" />
                     </li>
                     <li class="ttr_menu_items_parent dropdown"><a href="contact.html"

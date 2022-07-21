@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Noticias')
+
 @section('content')
     <div class="content-wrapper" style="min-height: 234px;">
         <!-- Content Header (Page header) -->
@@ -7,8 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Slider</h1>
-
+                        <h1>Noticias</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -92,7 +92,7 @@
                     </button>
                 </div>
                 {{-- mensagem enviado com sucesso --}}
-                <form action="{{ route('admin.pages.slider.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.slider.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -118,6 +118,5 @@
             <!-- /.modal-dialog -->
         </div>
     </div>
-    <!-- /.modal -->
-
+    <!-- /.modal -->◊
 @endsection

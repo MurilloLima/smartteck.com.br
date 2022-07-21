@@ -23,7 +23,7 @@
 
         @include('admin.inc.nav')
         @include('admin.inc.sidebar')
-
+        
         @yield('content')
 
         @include('admin.inc.footer')

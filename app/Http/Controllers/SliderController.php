@@ -14,7 +14,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
+        $data = Slider::all();
+        return view('admin.pages.slider.index', compact('data'));
     }
 
     /**
@@ -40,18 +41,24 @@ class SliderController extends Controller
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
             # code...
             $image = $request->file;
+
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = uniqid(date('HisYmd'));
+
+            // Recupera a extensão do arquivo
             $extension = $image->extension();
 
-            $nameFile = md5($image->getClientOriginalName() . strtotime("now") . "." . $extension);
+            // Define finalmente o nome
+            $nameFile = "{$name}.{$extension}";
+
             $image->move(public_path('images/slider'), $nameFile);
             $slider->file = $nameFile;
-
         }
         $slider->save();
-        return redirect('/')->with('msg', 'Imagem cadastrada com sucesso!');
+        return redirect()->back()->with('msg', 'Imagem cadastrada com sucesso!');
     }
 
-    /**
+    /**x
      * Display the specified resource.
      *
      * @param  \App\Models\Slider  $slider
@@ -93,6 +100,7 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        //
+        $slider->delete();
+        return redirect()->back()->with('msg', 'Imagem deletada com sucesso!');
     }
 }

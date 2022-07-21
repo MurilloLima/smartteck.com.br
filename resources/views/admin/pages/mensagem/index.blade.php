@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Mensagem')
 @section('content')
     <div class="content-wrapper" style="min-height: 234px;">
         <!-- Content Header (Page header) -->
@@ -7,14 +7,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Slider</h1>
+                        <h1>Mensagem</h1>
 
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item" class="btn btn-default" data-toggle="modal"
-                                data-target="#modal-default"><a href="#">Cadastrar</a></li>
+                            <li class="breadcrumb-item"><a href="#">Mensagem</a></li>
                             {{-- <li class="breadcrumb-item active">Fixed Layout</li> --}}
                         </ol>
                     </div>
@@ -80,44 +79,5 @@
         </section>
         <!-- /.content -->
     </div>
-
-    {{-- modal create --}}
-    <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Cadastrar novo slider</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {{-- mensagem enviado com sucesso --}}
-                <form action="{{ route('admin.pages.slider.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <!-- <label for="customFile">Custom File</label> -->
-
-                                <div class="custom-file">
-                                    <input type="file" name="file" required class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Imagem 1280x500</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </div>
-
-                    </div>
-                </form>
-
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-    </div>
-    <!-- /.modal -->
 
 @endsection

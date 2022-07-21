@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\MensagemController;
+use App\Http\Controllers\NoticiasController;
+use App\Http\Controllers\QuemSomosController;
 use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,40 +18,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Home
-Route::get('/', function () {
-    return view('home.pages.index');
-});
+// admin
+Route::get('/dashboard', [SliderController::class, 'index'])->name('admin.pages.slider.index')->middleware(['auth']);
+Route::post('slider/store/', [SliderController::class, 'store'])->name('admin.pages.slider.store');
+Route::resource('delete/slider', SliderController::class)->middleware(['auth']);
+Route::get('/mensagem', [MensagemController::class, 'index'])->name('admin.pages.mensagem.index')->middleware(['auth']);
+Route::get('/noticias', [NoticiasController::class, 'index'])->name('admin.pages.noticias.index')->middleware(['auth']);
+Route::get('/quem-somos', [QuemSomosController::class, 'index'])->name('admin.pages.quem-somos.index')->middleware(['auth']);
+Route::get('/clientes', [ClientesController::class, 'index'])->name('admin.pages.clientes.index')->middleware(['auth']);
 
+// store quem somos
+Route::post('quem-somos/store/', [QuemSomosController::class, 'store'])->name('admin.pages.quem-somos.store');
+Route::delete('/quem-somos/delete/{id}', [QuemSomosController::class, 'destroy'])->name('admin.pages.quem-somos.destroy');
 
+//home send contato
+Route::post('/send', [MensagemController::class, 'store'])->name('send.contact');
 
-//admin
-Route::get('/dashboard', function () {
-    return view('admin.pages.slider.index');
-})->middleware(['auth'])->name('admin.slider.index');
-
-Route::post('slider/store/', [SliderController::class, 'store'])->name('admin.slider.store');
-
-Route::get('/mensagem', function () {
-    return view('admin.pages.message');
-})->middleware(['auth'])->name('admin.mensagem');
-
-Route::get('/clientes', function () {
-    return view('admin.pages.clientes');
-})->middleware(['auth'])->name('admin.clientes');
-
-Route::get('/noticias', function () {
-    return view('admin.pages.noticias');
-})->middleware(['auth'])->name('admin.noticias');
-
-Route::get('/quem-somos', function () {
-    return view('admin.pages.quem-somos');
-})->middleware(['auth'])->name('admin.quem-somos');
-
+// home 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home.index');
     Route::get('contact', 'contact')->name('home.contact');
     Route::post('contact/', 'store')->name('contact.store');
+
+    Route::get('noticias/', 'noticias')->name('home.noticias.pages');
 
     // Route::post('clientes', 'store')->name('clientes.store')->middleware(['auth']);
     // Route::get('clientes/create', 'create')->name('clientes.create')->middleware(['auth']);

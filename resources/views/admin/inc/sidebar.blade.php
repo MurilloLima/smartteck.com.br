@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.slider.index') }}" class="brand-link">
+    <a href="{{ route('admin.pages.slider.index') }}" class="brand-link">
         <img src="{{ url('dist/img/AdminLTELogo.png') }}" alt="Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">Samartteck</span>
@@ -39,13 +39,13 @@
                 <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('admin.slider.index') }}" class="nav-link">
+                    <a href="{{ route('admin.pages.slider.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-list"></i>
                         <p>Slider</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.mensagem') }}" class="nav-link">
+                    <a href="{{ route('admin.pages.mensagem.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-book"></i>
                         <p>
                             Mensagem
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.clientes') }}" class="nav-link">
+                    <a href="{{ route('admin.pages.clientes.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Clientes
@@ -61,8 +61,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.noticias') }}" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fa fa-clock"></i>
                         <p>
                             Noticias
                         </p>
@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.quem-somos') }}" class="nav-link">
+                    <a href="{{ route('admin.pages.quem-somos.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-clock"></i>
                         <p>
                             Quem somos

@@ -13,11 +13,15 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('home.pages.contact');
+        // return view('home.pages.contact');
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
+    }
+
+    public function noticias()
+    {
+        // return view('home.pages.noticias');
     }
 }
