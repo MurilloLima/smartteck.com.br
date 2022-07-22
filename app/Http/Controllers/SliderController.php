@@ -14,7 +14,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $data = Slider::all();
+        $data = Slider::all()->sortDesc();
         return view('admin.pages.slider.index', compact('data'));
     }
 

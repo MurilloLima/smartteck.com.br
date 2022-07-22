@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.pages.noticias.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-clock"></i>
                         <p>
                             Noticias
@@ -72,7 +72,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.pages.quem-somos.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-clock"></i>
+                        <i class="nav-icon fa fa-award"></i>
                         <p>
                             Quem somos
                         </p>
@@ -86,7 +86,7 @@
                         <a href="route('logout')" class="nav-link"
                             onclick="event.preventDefault();
                         this.closest('form').submit();">
-                            <i class="nav-icon far fa-clock"></i>
+                            <i class="nav-icon fa fa-clock"></i>
                             Sair
                         </a>
                     </li>

@@ -14,7 +14,7 @@ class MensagemController extends Controller
      */
     public function index()
     {
-        $data = Mensagem::all();
+        $data = Mensagem::all()->sortDesc();
         return view('admin.pages.mensagem.index', compact('data'));
     }
 

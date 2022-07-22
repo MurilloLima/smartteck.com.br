@@ -46,11 +46,11 @@
                                     </th>
                                     <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Rendering engine: activate to sort column descending">Imagem
+                                        aria-label="Rendering engine: activate to sort column descending">Nome
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                        colspan="1" aria-label="Browser: activate to sort column ascending">Data de
-                                        criação</th>
+                                        colspan="1" aria-label="Browser: activate to sort column ascending">Telefone
+                                        </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-label="Browser: activate to sort column ascending">Ação
                                     </th>

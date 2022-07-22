@@ -13,7 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- fullCalendar -->
-    <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/main.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/main.css') }}"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 </head>
@@ -40,8 +40,8 @@
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- fullCalendar 2.2.5 -->
     <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('plugins/fullcalendar/main.js') }}"></script>
-    <script src="{{ asset('plugins/fullcalendar/locales/pt-br.js') }}"></script>
+    {{-- <script src="{{ asset('plugins/fullcalendar/main.js') }}"></script> --}}
+    {{-- <script src="{{ asset('plugins/fullcalendar/locales/pt-br.js') }}"></script> --}}
 
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="{{ asset('dist/js/demo.js') }}"></script> --}}

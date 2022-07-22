@@ -14,7 +14,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $data = Clientes::all();
+        $data = Clientes::all()->sortDesc();
         return view('admin.pages.clientes.index', compact('data'));
     }
 

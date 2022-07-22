@@ -31,22 +31,12 @@ Route::get('/clientes', [ClientesController::class, 'index'])->name('admin.pages
 Route::post('quem-somos/store/', [QuemSomosController::class, 'store'])->name('admin.pages.quem-somos.store');
 Route::delete('/quem-somos/delete/{id}', [QuemSomosController::class, 'destroy'])->name('admin.pages.quem-somos.destroy');
 
+//send noticias
+Route::post('noticias/store/', [NoticiasController::class, 'store'])->name('admin.pages.noticias.store');
+Route::delete('/noticias/delete/{id}', [NoticiasController::class, 'destroy'])->name('admin.pages.noticias.destroy');
+
 //home send contato
 Route::post('/send', [MensagemController::class, 'store'])->name('send.contact');
 
-// home 
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index')->name('home.index');
-    Route::get('contact', 'contact')->name('home.contact');
-    Route::post('contact/', 'store')->name('contact.store');
 
-    Route::get('noticias/', 'noticias')->name('home.noticias.pages');
-
-    // Route::post('clientes', 'store')->name('clientes.store')->middleware(['auth']);
-    // Route::get('clientes/create', 'create')->name('clientes.create')->middleware(['auth']);
-    // Route::get('clientes/{item}', 'show')->name('clientes.show')->middleware(['auth']);
-    // Route::put('clientes/{item}', 'update')->name('clientes.update')->middleware(['auth']);
-    // Route::delete('clientes/{item}', 'destroy')->name('clientes.destroy')->middleware(['auth']);
-    // Route::get('clientes/{item}/edit', 'edit')->name('clientes.edit')->middleware(['auth']);
-});
 require __DIR__ . '/auth.php';

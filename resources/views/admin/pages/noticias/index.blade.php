@@ -63,7 +63,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             {{-- <a href="{{ url('delete', $item->id) }}">Deletar</a> --}}
-                                            <form method="post" action="{{ url('delete/slider', $item->id) }}">
+                                            <form method="post" action="{{ url('delete/noticias', $item->id) }}">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -86,23 +86,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Cadastrar novo slider</h4>
+                    <h4 class="modal-title">Cadastrar</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 {{-- mensagem enviado com sucesso --}}
-                <form action="{{ route('admin.slider.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.pages.noticias.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="form-group">
-                                <!-- <label for="customFile">Custom File</label> -->
-
+                                <label for="customFile">Imagem</label>
                                 <div class="custom-file">
                                     <input type="file" name="file" required class="custom-file-input" id="customFile">
                                     <label class="custom-file-label" for="customFile">Imagem 1280x500</label>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="customFile">Titulo</label>
+                                <div class="custom-file">
+                                    <input type="text" name="title" required class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="customFile">Descrição</label>
+                                <textarea name="content" class="form-control" required cols="30" rows="10"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">

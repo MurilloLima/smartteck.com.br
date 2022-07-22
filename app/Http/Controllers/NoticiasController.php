@@ -17,7 +17,8 @@ class NoticiasController extends Controller
 
     public function index()
     {
-        return view('admin.pages.noticias.index');
+        $data = Noticias::all()->sortDesc();
+        return view('admin.pages.noticias.index', compact('data'));
     }
 
     /**
@@ -38,7 +39,26 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $slider = new Noticias();
+        // upload de image
+        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+            # code...
+            $image = $request->file;
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = uniqid(date('HisYmd'));
+            // Recupera a extensão do arquivo
+            $extension = $image->extension();
+            // Define finalmente o nome
+            $nameFile = "{$name}.{$extension}";
+            $image->move(public_path('images/slider'), $nameFile);
+        }
+        $slider->file = $nameFile;
+        $slider->title = $request->title;
+        $slider->content = $request->content;
+        $slider->slug = 'dsadsa';
+        $slider->save();
+
+        return redirect()->back()->with('msg', 'Cadastrado com sucesso!');
     }
 
     /**
@@ -81,8 +101,9 @@ class NoticiasController extends Controller
      * @param  \App\Models\Noticias  $noticias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Noticias $noticias)
+    public function destroy($id)
     {
-        //
+        Noticias::destroy($id);
+        return redirect()->back()->with('msg', 'Deletada com sucesso!');
     }
 }
