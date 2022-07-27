@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Noticias')
+@section('title', 'Valores')
 
 @section('content')
     <div class="content-wrapper" style="min-height: 234px;">
@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Noticias</h1>
+                        <h1>Valores</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -62,7 +62,7 @@
                                         <td>{{ $item->file }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
-                                            <form method="post" action="/noticias/delete/{{ $item->id }}">
+                                            <form method="post" action="/valores/delete/{{ $item->id }}">
                                                 {{ method_field('DELETE') }}
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -91,7 +91,7 @@
                     </button>
                 </div>
                 {{-- mensagem enviado com sucesso --}}
-                <form action="{{ route('admin.pages.noticias.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.pages.valores.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -99,7 +99,7 @@
                                 <label for="customFile">Imagem</label>
                                 <div class="custom-file">
                                     <input type="file" name="file" required class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Imagem 1280x500</label>
+                                    <label class="custom-file-label" for="customFile">Imagem 250x250 arredondada</label>
                                 </div>
                             </div>
                             <div class="form-group">

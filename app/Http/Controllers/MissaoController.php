@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Noticias;
+use App\Models\Missao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class NoticiasController extends Controller
+class MissaoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-
     public function index()
     {
-        $data = Noticias::all()->sortDesc();
-        return view('admin.pages.noticias.index', compact('data'));
+        $data = Missao::all()->sortDesc();
+        return view('admin.pages.missao.index', compact('data'));
     }
 
     /**
@@ -40,7 +37,7 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = new Noticias();
+        $slider = new Missao();
         // upload de image
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
             # code...
@@ -51,7 +48,7 @@ class NoticiasController extends Controller
             $extension = $image->extension();
             // Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
-            $image->move(public_path('images/noticias'), $nameFile);
+            $image->move(public_path('images/messao'), $nameFile);
         }
         $slider->file = $nameFile;
         $slider->title = $request->title;
@@ -65,21 +62,20 @@ class NoticiasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Missao  $missao
      * @return \Illuminate\Http\Response
      */
-    public function show(Noticias $noticias)
+    public function show(Missao $missao)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Missao  $missao
      * @return \Illuminate\Http\Response
      */
-    public function edit(Noticias $noticias)
+    public function edit(Missao $missao)
     {
         //
     }
@@ -88,10 +84,10 @@ class NoticiasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Missao  $missao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Noticias $noticias)
+    public function update(Request $request, Missao $missao)
     {
         //
     }
@@ -99,12 +95,12 @@ class NoticiasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Missao  $missao
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Noticias::destroy($id);
+        Missao::destroy($id);
         return redirect()->back()->with('msg', 'Deletada com sucesso!');
     }
 }

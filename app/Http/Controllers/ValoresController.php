@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Noticias;
+use App\Models\Valores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class NoticiasController extends Controller
+class ValoresController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-
     public function index()
     {
-        $data = Noticias::all()->sortDesc();
-        return view('admin.pages.noticias.index', compact('data'));
+        $data = Valores::all()->sortDesc();
+        return view('admin.pages.valores.index', compact('data'));
     }
 
     /**
@@ -40,7 +37,7 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = new Noticias();
+        $valores = new Valores();
         // upload de image
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
             # code...
@@ -51,13 +48,13 @@ class NoticiasController extends Controller
             $extension = $image->extension();
             // Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
-            $image->move(public_path('images/noticias'), $nameFile);
+            $image->move(public_path('images/valores'), $nameFile);
         }
-        $slider->file = $nameFile;
-        $slider->title = $request->title;
-        $slider->content = $request->content;
-        $slider->slug = Str::slug($request->title);
-        $slider->save();
+        $valores->file = $nameFile;
+        $valores->title = $request->title;
+        $valores->content = $request->content;
+        $valores->slug = Str::slug($request->title);
+        $valores->save();
 
         return redirect()->back()->with('msg', 'Cadastrado com sucesso!');
     }
@@ -65,10 +62,10 @@ class NoticiasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Valores  $valores
      * @return \Illuminate\Http\Response
      */
-    public function show(Noticias $noticias)
+    public function show(Valores $valores)
     {
         //
     }
@@ -76,10 +73,10 @@ class NoticiasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Valores  $valores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Noticias $noticias)
+    public function edit(Valores $valores)
     {
         //
     }
@@ -88,10 +85,10 @@ class NoticiasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Valores  $valores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Noticias $noticias)
+    public function update(Request $request, Valores $valores)
     {
         //
     }
@@ -99,12 +96,12 @@ class NoticiasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Noticias  $noticias
+     * @param  \App\Models\Valores  $valores
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Noticias::destroy($id);
+        Valores::destroy($id);
         return redirect()->back()->with('msg', 'Deletada com sucesso!');
     }
 }

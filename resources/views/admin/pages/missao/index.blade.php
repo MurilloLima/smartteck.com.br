@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Quem somos')
+@section('title', 'Missão')
 
 @section('content')
     <div class="content-wrapper" style="min-height: 234px;">
@@ -8,12 +8,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quem Somos</h1>
-
+                        <h1>Missão</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Quem somos</a></li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item" class="btn btn-default" data-toggle="modal"
                                 data-target="#modal-default"><a href="#">Cadastrar</a></li>
                             {{-- <li class="breadcrumb-item active">Fixed Layout</li> --}}
@@ -42,11 +41,11 @@
                                 <tr>
                                     <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Rendering engine: activate to sort column descending">Titulo
+                                        aria-label="Rendering engine: activate to sort column descending">#
                                     </th>
                                     <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Rendering engine: activate to sort column descending">Conteúdo
+                                        aria-label="Rendering engine: activate to sort column descending">Imagem
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-label="Browser: activate to sort column ascending">Data de
@@ -60,12 +59,10 @@
                                 @foreach ($data as $item)
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">{{ $item->id }}</td>
-                                        <td>{{ $item->title }}</td>
-                                        <td>{{ $item->content }}</td>
+                                        <td>{{ $item->file }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
-                                            {{-- <a href="{{ url('delete', $item->id) }}">Deletar</a> --}}
-                                            <form method="post" action="/quem-somos/delete/{{ $item->id }}">
+                                            <form method="post" action="/missao/delete/{{ $item->id }}">
                                                 {{ method_field('DELETE') }}
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -88,23 +85,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Cadastrar quem somos</h4>
+                    <h4 class="modal-title">Cadastrar</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 {{-- mensagem enviado com sucesso --}}
-                <form action="{{ route('admin.pages.quem-somos.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.pages.missao.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="form-group">
-                                <label for="">Titulo</label>
-                                <input type="text" name="title" class="form-control">
+                                <label for="customFile">Imagem</label>
+                                <div class="custom-file">
+                                    <input type="file" name="file" required class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Imagem 250x250 arredondada</label>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="">Conteudo</label>
-                                <textarea name="content" class="form-control" rows="10"></textarea>
+                                <label for="customFile">Titulo</label>
+                                <div class="custom-file">
+                                    <input type="text" name="title" required class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="customFile">Descrição</label>
+                                <textarea name="content" class="form-control" required cols="30" rows="10"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -120,6 +126,5 @@
             <!-- /.modal-dialog -->
         </div>
     </div>
-    <!-- /.modal -->
-
+    <!-- /.modal -->◊
 @endsection

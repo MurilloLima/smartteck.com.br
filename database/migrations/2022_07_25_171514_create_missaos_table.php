@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quem_somos', function (Blueprint $table) {
+        Schema::create('missaos', function (Blueprint $table) {
             $table->id();
+            $table->string('file');
             $table->string('title');
-            $table->string('content');
+            $table->string('slug');
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quem_somos');
+        Schema::dropIfExists('missaos');
     }
 };

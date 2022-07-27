@@ -71,27 +71,26 @@
                             <div class="ttr_Home_html_column10">
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
-                                <div class="html_content">
-                                    <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
-                                            style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
-                                                    class="ttr_uniform" src="{{ asset('home/assets/images/04.jpg') }}"
-                                                    style="max-width:250px;max-height:250px;" /></span></span></p>
-                                    <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
-                                            Missão
-                                        </span></p>
-                                    <p style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                        <span style="color:rgba(5,38,55,1);">T</span><span
-                                            style="color:rgba(5,38,55,1);">est link
-                                            adipiscing elit.Nullam dignissim convallis est.Quisque aliquam. Donec faucibus.
-                                            Nunc
-                                            iaculis suscipit dui.Nam sit amet sem. Aliquam libero nisi, imperdiet at,
-                                            tincidunt
-                                            nec, gravida vehicula, nisl.Praesent mattis, massa quis luctus fermentum, turpis
-                                            mi
-                                            volutpat justo</span><span style="color:rgba(5,38,55,1);">.</span>
-                                    </p>
-                                </div>
+                                @foreach ($visao as $item)
+                                    <div class="html_content">
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
+                                                style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
+                                                        class="ttr_uniform" src="{{ asset('images/visao/' . $item->file) }}"
+                                                        style="max-width:250px;max-height:250px;" /></span></span></p>
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
+                                                {{ $item->title }}
+                                            </span></p>
+                                        <p
+                                            style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
+                                            <span style="color:rgba(5,38,55,1);">T</span><span
+                                                style="color:rgba(5,38,55,1);">
+                                                {{ $item->content }}
+                                            </span><span style="color:rgba(5,38,55,1);">.</span>
+                                        </p>
+                                    </div>
+                                @endforeach
+
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
                                 <div style="clear:both;"></div>
@@ -103,27 +102,26 @@
                             <div class="ttr_Home_html_column11">
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
-                                <div class="html_content">
-                                    <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
-                                            style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
-                                                    class="ttr_uniform" src="{{ asset('home/assets/images/05.jpg') }}"
-                                                    style="max-width:250px;max-height:250px;" /></span></span></p>
-                                    <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
-                                            Visão</span></p>
-                                    <p style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                        <span style="color:rgba(5,38,55,1);">Quisque aliquam. Donec faucibus. Nunc iaculis
-                                            suscipit
-                                            dui.Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida
-                                            vehicula, nisl.Praesent mattis, massa quis luctus fermentum, turpis mi volutpat
-                                            justo,
-                                            eu volutpat enim diam eget metus.Maecenas ornare tortor.</span>
-                                    </p>
-                                    {{-- <p style="margin:2.86em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                    <span><a HREF="#" target="_self" class="btn btn-md btn-default">VIEW
-                                            MORE</a></span>
-                                </p> --}}
-                                </div>
+                                @foreach ($missao as $item)
+                                    <div class="html_content">
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
+                                                style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
+                                                        class="ttr_uniform"
+                                                        src="{{ asset('images/messao/' . $item->file) }}"
+                                                        style="max-width:250px;max-height:250px;" /></span></span></p>
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
+                                                {{ $item->title }}
+                                            </span></p>
+                                        <p
+                                            style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
+                                            <span style="color:rgba(5,38,55,1);">T</span><span
+                                                style="color:rgba(5,38,55,1);">
+                                                {{ $item->content }}
+                                            </span><span style="color:rgba(5,38,55,1);">.</span>
+                                        </p>
+                                    </div>
+                                @endforeach
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
                                 <div style="clear:both;"></div>
@@ -135,25 +133,26 @@
                             <div class="ttr_Home_html_column12">
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
-                                <div class="html_content">
-                                    <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
-                                            style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
-                                                    class="ttr_uniform" src="{{ asset('home/assets/images/06.jpg') }}"
-                                                    style="max-width:250px;max-height:250px;" /></span></span></p>
-                                    <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">Valores</span>
-                                    </p>
-                                    <p style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                        <span style="color:rgba(5,38,55,1);">Nunc iaculis suscipit dui.Nam sit amet sem.
-                                            Aliquam
-                                            libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl.Praesent
-                                            mattis, massa
-                                            quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget
-                                            metus.Maecenas ornare tortor.</span><span style="color:rgba(5,38,55,1);">
-                                        </span><span style="color:rgba(5,38,55,1);">massa quis luctus fermentum</span><span
-                                            style="color:rgba(5,38,55,1);">.</span>
-                                    </p>
-                                </div>
+                                @foreach ($valores as $item)
+                                    <div class="html_content">
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
+                                                style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
+                                                        class="ttr_uniform"
+                                                        src="{{ url('images/valores/', [$item->file]) }}"
+                                                        style="max-width:250px;max-height:250px;" /></span></span></p>
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
+                                                {{ $item->title }}
+                                            </span></p>
+                                        <p
+                                            style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
+                                            <span style="color:rgba(5,38,55,1);">T</span><span
+                                                style="color:rgba(5,38,55,1);">
+                                                {{ $item->content }}
+                                            </span><span style="color:rgba(5,38,55,1);">.</span>
+                                        </p>
+                                    </div>
+                                @endforeach
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
                                 <div style="clear:both;"></div>
@@ -167,67 +166,50 @@
                             <div class="ttr_Home_html_column20">
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
-                                <div class="html_content">
-                                    <p><span class="ttr_image"
-                                            style="float:Left;overflow:hidden;margin:0em 2.14em 0em 0em;"><span><img
-                                                    class="ttr_uniform" src="{{ asset('home/assets/images/32.jpeg') }}"
-                                                    style="max-width:350px;max-height:250px;" /></span></span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">N</span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">ULLAM</span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
-                                        </span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">DIGNISSIM</span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
-                                        </span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">CONVALLIS</span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
-                                        </span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">EST.</span>
-                                    </p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span
-                                            style="color:rgba(5,38,55,1);">Quisque aliquam. Donec faucibus. Nunc iaculis
-                                            suscipit
-                                            dui.Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida
-                                            vehicula, nisl.Praesent mattis, massa quis luctus fermentum, turpis mi volutpat
-                                            justo,
-                                            eu volutpat enim diam eget metus.Maecenas ornare tortor.Quisque aliquam. Donec
-                                            faucibus. Nunc iaculis suscipit dui.Nam sit amet sem. Aliquam libero nisi,
-                                            imperdiet
-                                            at, tincidunt nec, gravida vehicula, nisl.Praesent mattis, massa quis luctus
-                                            fermentum,
-                                            turpis mi volutpat justo</span><span style="color:rgba(5,38,55,1);">.</span>
-                                    </p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span><a
-                                                HREF="#" target="_self" class="btn btn-md btn-default">LER
-                                                MAIS</a></span></p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><br
-                                            style="color:rgba(5,38,55,1);" /></p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><br
-                                            style="color:rgba(5,38,55,1);" /></p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span
-                                            class="ttr_image"
-                                            style="float:Left;overflow:hidden;margin:0em 2.14em 0em 0em;"><span><img
-                                                    class="ttr_uniform" src="{{ asset('home/assets/images/33.jpeg') }}"
-                                                    style="max-width:350px;max-height:250px;" /></span></span><span
-                                            style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">ALIQUAM
-                                            LIBERO NISI TUPIS NEC.</span></p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span
-                                            style="color:rgba(5,38,55,1);">Quisque aliquam. Donec faucibus. Nunc iaculis
-                                            suscipit
-                                            dui.Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida
-                                            vehicula, nisl.Praesent mattis, massa quis luctus fermentum, turpis mi volutpat
-                                            justo,
-                                            eu volutpat enim diam eget metus.Maecenas ornare tortor.Quisque aliquam. Donec
-                                            faucibus. Nunc iaculis suscipit dui.Nam sit amet sem. Aliquam libero nisi,
-                                            imperdiet
-                                            at, tincidunt nec, gravida vehicula, nisl.Praesent mattis, massa quis luctus
-                                            fermentum,
-                                            turpis mi volutpat justo</span><span style="color:rgba(5,38,55,1);">.</span>
-                                    </p>
-                                    <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span><a
-                                                HREF="#" target="_self" class="btn btn-md btn-default">LER
-                                                MAIS</a></span></p>
-                                </div>
+                                @foreach ($noticias as $item)
+                                    <div class="html_content">
+                                        <p><span class="ttr_image"
+                                                style="float:Left;overflow:hidden;margin:0em 2.14em 0em 0em;"><span><img
+                                                        class="ttr_uniform"
+                                                        src="{{ asset('images/noticias/' . $item->file) }}"
+                                                        style="max-width:350px;max-height:250px;" /></span></span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">N</span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">ULLAM</span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
+                                            </span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">DIGNISSIM</span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
+                                            </span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">CONVALLIS</span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
+                                            </span><span
+                                                style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">EST.</span>
+                                        </p>
+                                        <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span
+                                                style="color:rgba(5,38,55,1);">Quisque aliquam. Donec faucibus. Nunc
+                                                iaculis
+                                                suscipit
+                                                dui.Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec,
+                                                gravida
+                                                vehicula, nisl.Praesent mattis, massa quis luctus fermentum, turpis mi
+                                                volutpat
+                                                justo,
+                                                eu volutpat enim diam eget metus.Maecenas ornare tortor.Quisque aliquam.
+                                                Donec
+                                                faucibus. Nunc iaculis suscipit dui.Nam sit amet sem. Aliquam libero nisi,
+                                                imperdiet
+                                                at, tincidunt nec, gravida vehicula, nisl.Praesent mattis, massa quis luctus
+                                                fermentum,
+                                                turpis mi volutpat justo</span><span
+                                                style="color:rgba(5,38,55,1);">.</span>
+                                        </p>
+                                        <p style="margin:0.71em 0em 0em 0em;line-height:1.76056338028169;"><span><a
+                                                    HREF="#" target="_self" class="btn btn-md btn-default">LER
+                                                    MAIS</a></span></p>
+
+                                    </div>
+                                @endforeach
+
                                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
                                 </div>
                                 <div style="clear:both;"></div>
