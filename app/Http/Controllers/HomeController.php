@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Endereco;
 use App\Models\Missao;
 use App\Models\Slider;
 use App\Models\Valores;
@@ -20,7 +21,9 @@ class HomeController extends Controller
         $valores = Valores::all()->sortDesc();
         $noticias = Noticias::all()->sortDesc();
 
-        return view('home.pages.index', compact('slider', 'visao', 'missao', 'valores', 'noticias'));
+        $endereco = Endereco::all();
+
+        return view('home.pages.index', compact('slider', 'visao', 'missao', 'valores', 'noticias', 'endereco'));
     }
 
     public function contact()
@@ -34,7 +37,8 @@ class HomeController extends Controller
 
     public function noticias()
     {
+        $endereco = Endereco::all();
         $data = Noticias::all();
-        return view('home.pages.noticias', compact('data'));
+        return view('home.pages.noticias', compact('data', 'endereco'));
     }
 }

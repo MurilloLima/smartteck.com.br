@@ -100,11 +100,12 @@
 
                     </a>
                 </li>
+                
                 <li class="nav-item">
-                    <a href="{{ route('admin.pages.quem-somos.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-award"></i>
+                    <a href="{{ route('admin.pages.endereco.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-search"></i>
                         <p>
-                            Quem somos
+                            Endereço
                         </p>
                         {{-- <i class="fas fa-angle-left right"></i> --}}
 

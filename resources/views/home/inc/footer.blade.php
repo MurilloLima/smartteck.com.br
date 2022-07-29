@@ -15,17 +15,12 @@
                     </p>
                     <p style="margin:1.43em 0em 0.36em 4.29em;line-height:1.40845070422535;"><span
                             style="font-family:'Arial';font-weight:700;color:rgba(255,255,255,1);">
-                            Rua Nova IV, Número 912 Bairro Alto Bonito
-                        </span></p>
-                    <p style="margin:0.36em 0em 0.36em 4.29em;line-height:1.40845070422535;"><span
-                            style="font-family:'Arial';font-weight:700;color:rgba(255,255,255,1);">Telefone:
-                            (99) 99230-9702
-                        </span></p>
-                    <p style="margin:0.36em 0em 0.36em 4.29em;line-height:1.40845070422535;"><span
-                            style="font-family:'Arial';font-weight:700;color:rgba(255,255,255,1);">
-                            CEP: 65975-000
+                            @foreach ($endereco as $item)
+                                {{ $item->text }}
+                            @endforeach
 
                         </span></p>
+
                 </div>
                 <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
             </div>

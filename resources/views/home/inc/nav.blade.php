@@ -43,7 +43,7 @@
                         <hr class="horiz_separator" />
                     </li>
                     <li class="ttr_menu_items_parent dropdown"><a href="{{ route('home.pages.noticias') }}"
-                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Noticicas</a>
+                            class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Notícicas</a>
                         <hr class="horiz_separator" />
                     </li>
                     <li class="ttr_menu_items_parent dropdown"><a href="contact.html"

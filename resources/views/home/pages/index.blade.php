@@ -73,20 +73,25 @@
                                 </div>
                                 @foreach ($visao as $item)
                                     <div class="html_content">
-                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span class="ttr_image"
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;">
+                                            <span class="ttr_image"
                                                 style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img
                                                         class="ttr_uniform" src="{{ asset('images/visao/' . $item->file) }}"
-                                                        style="max-width:250px;max-height:250px;" /></span></span></p>
-                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;"><span
+                                                        style="max-width:250px;max-height:250px;" />
+                                                </span>
+                                            </span>
+                                        </p>
+                                        <p style="margin:0.14em 0em 0em 0em;text-align:Center;">
+                                            <span
                                                 style="font-family:'Arial';font-weight:700;font-size:1.571em;color:rgba(5,38,55,1);">
                                                 {{ $item->title }}
-                                            </span></p>
+                                            </span>
+                                        </p>
                                         <p
                                             style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                            <span style="color:rgba(5,38,55,1);">T</span><span
-                                                style="color:rgba(5,38,55,1);">
+                                            <span style="color:rgba(5,38,55,1);">
                                                 {{ $item->content }}
-                                            </span><span style="color:rgba(5,38,55,1);">.</span>
+                                            
                                         </p>
                                     </div>
                                 @endforeach
@@ -115,10 +120,10 @@
                                             </span></p>
                                         <p
                                             style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                            <span style="color:rgba(5,38,55,1);">T</span><span
-                                                style="color:rgba(5,38,55,1);">
+                                            <span style="color:rgba(5,38,55,1);">
                                                 {{ $item->content }}
-                                            </span><span style="color:rgba(5,38,55,1);">.</span>
+                                            </span><span style="color:rgba(5,38,55,1);">
+                                            </span>
                                         </p>
                                     </div>
                                 @endforeach
@@ -146,10 +151,8 @@
                                             </span></p>
                                         <p
                                             style="margin:0.71em 0em 0em 0em;text-align:Center;line-height:1.76056338028169;">
-                                            <span style="color:rgba(5,38,55,1);">T</span><span
-                                                style="color:rgba(5,38,55,1);">
+                                            <span style="color:rgba(5,38,55,1);">
                                                 {{ $item->content }}
-                                            </span><span style="color:rgba(5,38,55,1);">.</span>
                                         </p>
                                     </div>
                                 @endforeach
@@ -163,10 +166,13 @@
                     </div>
                     <div class="ttr_Home_html_row2 row">
                         <div class="post_column col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="ttr_Home_html_column20">
-                                <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
-                                </div>
-                                @foreach ($noticias as $item)
+
+                            @foreach ($noticias as $item)
+                                <div class="ttr_Home_html_column20">
+                                    <div
+                                        style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
+                                    </div>
+
                                     <div class="html_content">
                                         <p><span class="ttr_image"
                                                 style="float:Left;overflow:hidden;margin:0em 2.14em 0em 0em;"><span><img
@@ -208,12 +214,14 @@
                                                     MAIS</a></span></p>
 
                                     </div>
-                                @endforeach
 
-                                <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
+
+                                    <div
+                                        style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;">
+                                    </div>
+                                    <div style="clear:both;"></div>
                                 </div>
-                                <div style="clear:both;"></div>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
                         </div>

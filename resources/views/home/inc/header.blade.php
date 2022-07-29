@@ -1,6 +1,5 @@
 <div class="totopshow">
-    <a href="#" class="back-to-top"><img alt="Back to Top"
-            src="{{ asset('home/assets/images/gototop0.png') }}" /></a>
+    <a href="#" class="back-to-top"><img alt="Back to Top" src="{{ asset('home/assets/images/gototop0.png') }}" /></a>
 </div>
 <header id="ttr_header">
     <div id="ttr_header_inner">
@@ -14,7 +13,9 @@
         <div class="ttr_headershape02">
             <div class="html_content">
                 <p><span style="font-size:0.857em;color:rgba(243,243,243,1);">
-                        Rua Nova IV, Número 912 Bairro Alto Bonito
+                        @foreach ($endereco as $item)
+                            {{ $item->text }}
+                        @endforeach
                     </span></p>
             </div>
         </div>
