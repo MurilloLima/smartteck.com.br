@@ -17,17 +17,8 @@ Route::get('noticia/', [NoticiaController::class, 'index'])->name('noticias.inde
 Route::get('noticia/{slug}', [HomeController::class, 'view'])->name('noticia.view');
 Route::get('contact/', [HomeController::class, 'contact'])->name('contact.index');
 
-//cobrancas
-Route::get('cobrancas/', [HomeController::class, 'cobrancas'])->name('home.cobrancas');
-
-
-
 // API
 Route::get('api/', [HomeController::class, 'api'])->name('documentacao.api');
-
-
-// end home
-
 
 //administrativo
 Route::get('/dashboard', [SliderController::class, 'index'])->middleware(['auth', 'verified'])->name('');
