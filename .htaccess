@@ -1,7 +1,3 @@
-RewriteCond %{HTTP_HOST} ^smartteck.com.br$ [NC,OR]
-RewriteCond %{HTTP_HOST} ^www.smartteck.com.br$
-RewriteCond %{REQUEST_URI} !public/ 
+RewriteEngine On
+RewriteRule ^$ /public/ [L]
 RewriteRule (.*) /public/$1 [L]
-
-
-
