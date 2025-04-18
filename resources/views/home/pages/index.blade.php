@@ -7,12 +7,12 @@
         <div class="ws_images">
             <ul>
                 <li>
-                    <img src="{{ asset('upload/slider/01.png') }}" alt="bootstrap carousel example"
-                        title="" id="wows1_0" />
+                    <img src="{{ asset('upload/slider/01.png') }}" alt="bootstrap carousel example" title=""
+                        id="wows1_0" />
                 </li>
                 <li>
-                    <img src="{{ asset('upload/slider/02.png') }}" alt="bootstrap carousel example"
-                        title="" id="wows1_0" />
+                    <img src="{{ asset('upload/slider/02.png') }}" alt="bootstrap carousel example" title=""
+                        id="wows1_0" />
                 </li>
             </ul>
         </div>
@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="row g-4">
                     <div class="col-lg-4 text-center col-md-6 wow fadeInUp">
-                        {{-- <img src="{{ asset('upload/visao/' . $visao->image) }}" alt="" width="140"> --}}
+                        <img src="{{ asset('upload/visao/01.jpj') }}" alt="" width="140">
                         <div class="ps-4">
                             <h5 class="mb-3">Visão</h5>
                             {{-- <p>{{ $visao->content }}</p> --}}

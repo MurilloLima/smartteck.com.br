@@ -21,15 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slider = Slider::all();
         $noticias = Noticia::all();
-        // $endereco = Endereco::find(1);
-
-        // $missao = Missao::find(1);
-        // $visao = Visao::find(1);
-        // $valores = Valores::find(1);
-
-        return view('home.pages.index', compact('slider', 'noticias'));
+        return view('home.pages.index', compact('noticias'));
     }
     public function about($id)
     {
