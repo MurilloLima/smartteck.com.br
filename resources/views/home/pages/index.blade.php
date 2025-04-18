@@ -6,12 +6,14 @@
     <div id="wowslider-container1">
         <div class="ws_images">
             <ul>
-                @foreach ($slider as $item)
-                    <li>
-                        <img src="{{ asset('upload/slider/' . $item->file) }}" alt="bootstrap carousel example"
-                            title="{{ $item->text }}" id="wows1_0" />
-                    </li>
-                @endforeach
+                <li>
+                    <img src="{{ asset('upload/slider/01.png') }}" alt="bootstrap carousel example"
+                        title="" id="wows1_0" />
+                </li>
+                <li>
+                    <img src="{{ asset('upload/slider/02.png') }}" alt="bootstrap carousel example"
+                        title="" id="wows1_0" />
+                </li>
             </ul>
         </div>
         <!-- End WOWSlider.com BODY section -->
@@ -21,26 +23,26 @@
             <div class="container">
                 <div class="row g-4">
                     <div class="col-lg-4 text-center col-md-6 wow fadeInUp">
-                        <img src="{{ asset('upload/visao/' . $visao->image) }}" alt="" width="140">
+                        {{-- <img src="{{ asset('upload/visao/' . $visao->image) }}" alt="" width="140"> --}}
                         <div class="ps-4">
                             <h5 class="mb-3">Visão</h5>
-                            <p>{{ $visao->content }}</p>
+                            {{-- <p>{{ $visao->content }}</p> --}}
                             {{-- <a class="text-secondary border-bottom" href="">Read More</a> --}}
                         </div>
                     </div>
                     <div class="col-lg-4 text-center col-md-6 wow fadeInUp">
-                        <img src="{{ asset('upload/missao/' . $missao->image)  }}" alt="" width="140">
+                        {{-- <img src="{{ asset('upload/missao/' . $missao->image)  }}" alt="" width="140"> --}}
                         <div class="ps-4">
                             <h5 class="mb-3">Missão</h5>
-                            <p>{{ $missao->content }}</p>
+                            {{-- <p>{{ $missao->content }}</p> --}}
                             {{-- <a class="text-secondary border-bottom" href="">Read More</a> --}}
                         </div>
                     </div>
                     <div class="col-lg-4 text-center col-md-6 wow fadeInUp">
-                        <img src="{{ asset('upload/valores/' . $valores->image) }}" alt="" width="140">
+                        {{-- <img src="{{ asset('upload/valores/' . $valores->image) }}" alt="" width="140"> --}}
                         <div class="ps-4">
                             <h5 class="mb-3">Valores</h5>
-                            <p>{{ $valores->content ?? '' }}</p>
+                            {{-- <p>{{ $valores->content ?? '' }}</p> --}}
                             {{-- <a class="text-secondary border-bottom" href="">Read More</a> --}}
                         </div>
                     </div>

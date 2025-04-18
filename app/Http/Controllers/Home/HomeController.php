@@ -23,13 +23,13 @@ class HomeController extends Controller
     {
         $slider = Slider::all();
         $noticias = Noticia::all();
-        $endereco = Endereco::find(1);
+        // $endereco = Endereco::find(1);
 
-        $missao = Missao::find(1);
-        $visao = Visao::find(1);
-        $valores = Valores::find(1);
+        // $missao = Missao::find(1);
+        // $visao = Visao::find(1);
+        // $valores = Valores::find(1);
 
-        return view('home.pages.index', compact('slider', 'noticias', 'endereco', 'missao', 'visao', 'valores'));
+        return view('home.pages.index', compact('slider', 'noticias'));
     }
     public function about($id)
     {
@@ -77,6 +77,6 @@ class HomeController extends Controller
         return view('https://cobrancas.smartteck.com.br/i');
     }
 
-    
-    
+
+
 }
