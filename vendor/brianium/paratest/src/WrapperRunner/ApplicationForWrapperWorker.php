@@ -16,6 +16,7 @@ use PHPUnit\Runner\CodeCoverage;
 use PHPUnit\Runner\Extension\ExtensionBootstrapper;
 use PHPUnit\Runner\Extension\Facade as ExtensionFacade;
 use PHPUnit\Runner\Extension\PharLoader;
+use PHPUnit\Runner\Filter\Factory;
 use PHPUnit\Runner\TestSuiteLoader;
 use PHPUnit\Runner\TestSuiteSorter;
 use PHPUnit\TestRunner\TestResult\Facade as TestResultFacade;
@@ -24,6 +25,7 @@ use PHPUnit\TextUI\Configuration\CodeCoverageFilterRegistry;
 use PHPUnit\TextUI\Configuration\Configuration;
 use PHPUnit\TextUI\Configuration\PhpHandler;
 use PHPUnit\TextUI\Output\Default\ProgressPrinter\ProgressPrinter;
+use PHPUnit\TextUI\Output\Default\UnexpectedOutputPrinter;
 use PHPUnit\TextUI\Output\DefaultPrinter;
 use PHPUnit\TextUI\Output\NullPrinter;
 use PHPUnit\TextUI\Output\TestDox\ResultPrinter as TestDoxResultPrinter;
@@ -32,8 +34,12 @@ use PHPUnit\Util\ExcludeList;
 
 use function assert;
 use function file_put_contents;
+use function is_file;
 use function mt_srand;
 use function serialize;
+use function str_ends_with;
+use function strpos;
+use function substr;
 
 /**
  * @internal
@@ -50,25 +56,51 @@ final class ApplicationForWrapperWorker
     public function __construct(
         private readonly array $argv,
         private readonly string $progressFile,
+        private readonly string $unexpectedOutputFile,
         private readonly string $testresultFile,
         private readonly ?string $teamcityFile,
         private readonly ?string $testdoxFile,
         private readonly bool $testdoxColor,
+        private readonly ?int $testdoxColumns,
     ) {
     }
 
     public function runTest(string $testPath): int
     {
+        $null   = strpos($testPath, "\0");
+        $filter = null;
+        if ($null !== false) {
+            $filter = new Factory();
+            $name   = substr($testPath, $null + 1);
+            assert($name !== '');
+            $filter->addNameFilter($name);
+
+            $testPath = substr($testPath, 0, $null);
+        }
+
         $this->bootstrap();
 
-        $testSuiteRefl = (new TestSuiteLoader())->load($testPath);
-        $testSuite     = TestSuite::fromClassReflector($testSuiteRefl);
-
-        (new TestSuiteFilterProcessor())->process($this->configuration, $testSuite);
+        if (is_file($testPath) && str_ends_with($testPath, '.phpt')) {
+            $testSuite = TestSuite::empty($testPath);
+            $testSuite->addTestFile($testPath);
+        } else {
+            $testSuiteRefl = (new TestSuiteLoader())->load($testPath);
+            $testSuite     = TestSuite::fromClassReflector($testSuiteRefl);
+        }
 
         if (CodeCoverage::instance()->isActive()) {
             CodeCoverage::instance()->ignoreLines(
                 (new CodeCoverageMetadataApi())->linesToBeIgnored($testSuite),
+            );
+        }
+
+        (new TestSuiteFilterProcessor())->process($this->configuration, $testSuite);
+
+        if ($filter !== null) {
+            $testSuite->injectFilter($filter);
+
+            EventFacade::emitter()->testSuiteFiltered(
+                TestSuiteBuilder::from($testSuite),
             );
         }
 
@@ -139,15 +171,18 @@ final class ApplicationForWrapperWorker
             );
         }
 
-        new ProgressPrinter(
+        $printer = new ProgressPrinterOutput(
             DefaultPrinter::from($this->progressFile),
+            DefaultPrinter::from($this->unexpectedOutputFile),
+        );
+
+        new UnexpectedOutputPrinter($printer, EventFacade::instance());
+        new ProgressPrinter(
+            $printer,
             EventFacade::instance(),
             false,
-            120,
+            99999,
             $this->configuration->source(),
-            $this->configuration->restrictDeprecations(),
-            $this->configuration->restrictNotices(),
-            $this->configuration->restrictWarnings(),
         );
 
         if (isset($this->teamcityFile)) {
@@ -158,7 +193,10 @@ final class ApplicationForWrapperWorker
         }
 
         if (isset($this->testdoxFile)) {
-            $this->testdoxResultCollector = new TestResultCollector(EventFacade::instance());
+            $this->testdoxResultCollector = new TestResultCollector(
+                EventFacade::instance(),
+                $this->configuration->source(),
+            );
         }
 
         TestResultFacade::init();
@@ -174,6 +212,10 @@ final class ApplicationForWrapperWorker
 
     public function end(): void
     {
+        if (! $this->hasBeenBootstrapped) {
+            return;
+        }
+
         EventFacade::emitter()->testRunnerExecutionFinished();
         EventFacade::emitter()->testRunnerFinished();
 
@@ -182,6 +224,7 @@ final class ApplicationForWrapperWorker
         $result = TestResultFacade::result();
         if (isset($this->testdoxResultCollector)) {
             assert(isset($this->testdoxFile));
+            assert(isset($this->testdoxColumns));
 
             (new TestDoxResultPrinter(DefaultPrinter::from($this->testdoxFile), $this->testdoxColor))->print(
                 $this->testdoxResultCollector->testMethodsGroupedByClass(),

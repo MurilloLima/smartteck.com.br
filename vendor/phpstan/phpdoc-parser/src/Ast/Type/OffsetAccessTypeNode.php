@@ -9,11 +9,9 @@ class OffsetAccessTypeNode implements TypeNode
 
 	use NodeAttributes;
 
-	/** @var TypeNode */
-	public $type;
+	public TypeNode $type;
 
-	/** @var TypeNode */
-	public $offset;
+	public TypeNode $offset;
 
 	public function __construct(TypeNode $type, TypeNode $offset)
 	{
@@ -23,6 +21,13 @@ class OffsetAccessTypeNode implements TypeNode
 
 	public function __toString(): string
 	{
+		if (
+			$this->type instanceof CallableTypeNode
+			|| $this->type instanceof NullableTypeNode
+		) {
+			return '(' . $this->type . ')[' . $this->offset . ']';
+		}
+
 		return $this->type . '[' . $this->offset . ']';
 	}
 

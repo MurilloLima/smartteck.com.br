@@ -11,6 +11,7 @@ use Pest\Contracts\HasPrintableTestCaseName;
 use Pest\Exceptions\DatasetMissing;
 use Pest\Exceptions\ShouldNotHappen;
 use Pest\Exceptions\TestAlreadyExist;
+use Pest\Exceptions\TestClosureMustNotBeStatic;
 use Pest\Exceptions\TestDescriptionMissing;
 use Pest\Factories\Concerns\HigherOrderable;
 use Pest\Support\Reflection;
@@ -98,7 +99,7 @@ final class TestCaseFactory
     {
         if ('\\' === DIRECTORY_SEPARATOR) {
             // In case Windows, strtolower drive name, like in UsesCall.
-            $filename = (string) preg_replace_callback('~^(?P<drive>[a-z]+:\\\)~i', static fn ($match): string => strtolower($match['drive']), $filename);
+            $filename = (string) preg_replace_callback('~^(?P<drive>[a-z]+:\\\)~i', static fn (array $match): string => strtolower($match['drive']), $filename);
         }
 
         $filename = str_replace('\\\\', '\\', addslashes((string) realpath($filename)));
@@ -134,7 +135,7 @@ final class TestCaseFactory
 
         $hasPrintableTestCaseClassFQN = sprintf('\%s', HasPrintableTestCaseName::class);
         $traitsCode = sprintf('use %s;', implode(', ', array_map(
-            static fn ($trait): string => sprintf('\%s', $trait), $this->traits))
+            static fn (string $trait): string => sprintf('\%s', $trait), $this->traits))
         );
 
         $partsFQN = explode('\\', $classFQN);
@@ -142,7 +143,7 @@ final class TestCaseFactory
         $namespace = implode('\\', $partsFQN);
         $baseClass = sprintf('\%s', $this->class);
 
-        if ('' === trim($className)) {
+        if (trim($className) === '') {
             $className = 'InvalidTestName'.Str::random();
         }
 
@@ -154,7 +155,7 @@ final class TestCaseFactory
         foreach ($classAvailableAttributes as $attribute) {
             $classAttributes = array_reduce(
                 $methods,
-                fn (array $carry, TestCaseMethodFactory $methodFactory): array => (new $attribute())->__invoke($methodFactory, $carry),
+                fn (array $carry, TestCaseMethodFactory $methodFactory): array => (new $attribute)->__invoke($methodFactory, $carry),
                 $classAttributes
             );
         }
@@ -193,7 +194,7 @@ final class TestCaseFactory
             }
             PHP;
 
-            eval($classCode); // @phpstan-ignore-line
+            eval($classCode);
         } catch (ParseError $caught) {
             throw new RuntimeException(sprintf(
                 "Unable to create test case for test file at %s. \n %s",
@@ -214,6 +215,14 @@ final class TestCaseFactory
 
         if (array_key_exists($method->description, $this->methods)) {
             throw new TestAlreadyExist($method->filename, $method->description);
+        }
+
+        if (
+            $method->closure instanceof \Closure &&
+            (new \ReflectionFunction($method->closure))->isStatic()
+        ) {
+
+            throw new TestClosureMustNotBeStatic($method);
         }
 
         if (! $method->receivesArguments()) {
@@ -241,7 +250,7 @@ final class TestCaseFactory
                 throw ShouldNotHappen::fromMessage('The test description may not be empty.');
             }
 
-            if (Str::evaluable($method->description) === $methodName) {
+            if ($methodName === Str::evaluable($method->description)) {
                 return true;
             }
         }
@@ -259,7 +268,7 @@ final class TestCaseFactory
                 throw ShouldNotHappen::fromMessage('The test description may not be empty.');
             }
 
-            if (Str::evaluable($method->description) === $methodName) {
+            if ($methodName === Str::evaluable($method->description)) {
                 return $method;
             }
         }

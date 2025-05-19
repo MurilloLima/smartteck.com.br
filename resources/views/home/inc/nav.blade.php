@@ -15,7 +15,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Serviços</a>
                     <div class="dropdown-menu fade-up m-0 caixa-alta" style="text-transform: uppercase;">
                         <a href="https://smartteck.adiantesa.com/" class="dropdown-item">Antecipação de Recebíveis</a>
-                        <a href="https://emprestimos.sistemashugo.com.br/painel/" class="dropdown-item">Administrador</a>
+                        <a href="{{ route('login') }}" class="dropdown-item">Administrador</a>
                         <a href="https://smartteck.conectar.site/lojista/site/gerenciar" class="dropdown-item">Lojista</a>
                         <a href="https://smartteck.conectar.site/convenio/site/gerenciar" class="dropdown-item">Clube de Benefícios</a>
                         <a href="https://smartteck.conectar.site/corporativo/site/gerenciar" class="dropdown-item">Corporações</a>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contatos</a>
-                <a href="{{ route('login') }}" class="nav-item nav-link">Área do cliente</a>
+                <a href="https://smartteck.com.br/cobrancas/acesso" class="nav-item nav-link">Área do cliente</a>
             </div>
             <a href="https://web.whatsapp.com/send?phone=5599992309702" target="_blank" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Whatsapp<i
                     class="fa fa-arrow-right ms-3"></i></a>

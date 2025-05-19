@@ -2,24 +2,34 @@
 
 namespace PHPStan\PhpDocParser\Parser;
 
+use LogicException;
+use PHPStan\PhpDocParser\Ast\Comment;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use function array_pop;
 use function assert;
 use function count;
 use function in_array;
 use function strlen;
+use function substr;
 
 class TokenIterator
 {
 
 	/** @var list<array{string, int, int}> */
-	private $tokens;
+	private array $tokens;
 
-	/** @var int */
-	private $index;
+	private int $index;
 
-	/** @var int[] */
-	private $savePoints = [];
+	/** @var list<Comment> */
+	private array $comments = [];
+
+	/** @var list<array{int, list<Comment>}> */
+	private array $savePoints = [];
+
+	/** @var list<int> */
+	private array $skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS];
+
+	private ?string $newline = null;
 
 	/**
 	 * @param list<array{string, int, int}> $tokens
@@ -29,11 +39,7 @@ class TokenIterator
 		$this->tokens = $tokens;
 		$this->index = $index;
 
-		if ($this->tokens[$this->index][Lexer::TYPE_OFFSET] !== Lexer::TOKEN_HORIZONTAL_WS) {
-			return;
-		}
-
-		$this->index++;
+		$this->skipIrrelevantTokens();
 	}
 
 
@@ -43,6 +49,27 @@ class TokenIterator
 	public function getTokens(): array
 	{
 		return $this->tokens;
+	}
+
+
+	public function getContentBetween(int $startPos, int $endPos): string
+	{
+		if ($startPos < 0 || $endPos > count($this->tokens)) {
+			throw new LogicException();
+		}
+
+		$content = '';
+		for ($i = $startPos; $i < $endPos; $i++) {
+			$content .= $this->tokens[$i][Lexer::VALUE_OFFSET];
+		}
+
+		return $content;
+	}
+
+
+	public function getTokenCount(): int
+	{
+		return count($this->tokens);
 	}
 
 
@@ -81,6 +108,21 @@ class TokenIterator
 	}
 
 
+	public function endIndexOfLastRelevantToken(): int
+	{
+		$endIndex = $this->currentTokenIndex();
+		$endIndex--;
+		while (in_array($this->tokens[$endIndex][Lexer::TYPE_OFFSET], $this->skippedTokenTypes, true)) {
+			if (!isset($this->tokens[$endIndex - 1])) {
+				break;
+			}
+			$endIndex--;
+		}
+
+		return $endIndex;
+	}
+
+
 	public function isCurrentTokenValue(string $tokenValue): bool
 	{
 		return $this->tokens[$this->index][Lexer::VALUE_OFFSET] === $tokenValue;
@@ -108,13 +150,13 @@ class TokenIterator
 			$this->throwError($tokenType);
 		}
 
-		$this->index++;
-
-		if (($this->tokens[$this->index][Lexer::TYPE_OFFSET] ?? -1) !== Lexer::TOKEN_HORIZONTAL_WS) {
-			return;
+		if ($tokenType === Lexer::TOKEN_PHPDOC_EOL) {
+			if ($this->newline === null) {
+				$this->detectNewline();
+			}
 		}
 
-		$this->index++;
+		$this->next();
 	}
 
 
@@ -127,13 +169,7 @@ class TokenIterator
 			$this->throwError($tokenType, $tokenValue);
 		}
 
-		$this->index++;
-
-		if (($this->tokens[$this->index][Lexer::TYPE_OFFSET] ?? -1) !== Lexer::TOKEN_HORIZONTAL_WS) {
-			return;
-		}
-
-		$this->index++;
+		$this->next();
 	}
 
 
@@ -144,15 +180,20 @@ class TokenIterator
 			return false;
 		}
 
-		$this->index++;
-
-		if ($this->tokens[$this->index][Lexer::TYPE_OFFSET] === Lexer::TOKEN_HORIZONTAL_WS) {
-			$this->index++;
-		}
+		$this->next();
 
 		return true;
 	}
 
+	/**
+	 * @return list<Comment>
+	 */
+	public function flushComments(): array
+	{
+		$res = $this->comments;
+		$this->comments = [];
+		return $res;
+	}
 
 	/** @phpstan-impure */
 	public function tryConsumeTokenType(int $tokenType): bool
@@ -161,13 +202,64 @@ class TokenIterator
 			return false;
 		}
 
-		$this->index++;
-
-		if ($this->tokens[$this->index][Lexer::TYPE_OFFSET] === Lexer::TOKEN_HORIZONTAL_WS) {
-			$this->index++;
+		if ($tokenType === Lexer::TOKEN_PHPDOC_EOL) {
+			if ($this->newline === null) {
+				$this->detectNewline();
+			}
 		}
 
+		$this->next();
+
 		return true;
+	}
+
+
+	/**
+	 * @deprecated Use skipNewLineTokensAndConsumeComments instead (when parsing a type)
+	 */
+	public function skipNewLineTokens(): void
+	{
+		if (!$this->isCurrentTokenType(Lexer::TOKEN_PHPDOC_EOL)) {
+			return;
+		}
+
+		do {
+			$foundNewLine = $this->tryConsumeTokenType(Lexer::TOKEN_PHPDOC_EOL);
+		} while ($foundNewLine === true);
+	}
+
+
+	public function skipNewLineTokensAndConsumeComments(): void
+	{
+		if ($this->currentTokenType() === Lexer::TOKEN_COMMENT) {
+			$this->comments[] = new Comment($this->currentTokenValue(), $this->currentTokenLine(), $this->currentTokenIndex());
+			$this->next();
+		}
+
+		if (!$this->isCurrentTokenType(Lexer::TOKEN_PHPDOC_EOL)) {
+			return;
+		}
+
+		do {
+			$foundNewLine = $this->tryConsumeTokenType(Lexer::TOKEN_PHPDOC_EOL);
+			if ($this->currentTokenType() !== Lexer::TOKEN_COMMENT) {
+				continue;
+			}
+
+			$this->comments[] = new Comment($this->currentTokenValue(), $this->currentTokenLine(), $this->currentTokenIndex());
+			$this->next();
+		} while ($foundNewLine === true);
+	}
+
+
+	private function detectNewline(): void
+	{
+		$value = $this->currentTokenValue();
+		if (substr($value, 0, 2) === "\r\n") {
+			$this->newline = "\r\n";
+		} elseif (substr($value, 0, 1) === "\n") {
+			$this->newline = "\n";
+		}
 	}
 
 
@@ -195,12 +287,34 @@ class TokenIterator
 	public function next(): void
 	{
 		$this->index++;
+		$this->skipIrrelevantTokens();
+	}
 
-		if ($this->tokens[$this->index][Lexer::TYPE_OFFSET] !== Lexer::TOKEN_HORIZONTAL_WS) {
+
+	private function skipIrrelevantTokens(): void
+	{
+		if (!isset($this->tokens[$this->index])) {
 			return;
 		}
 
-		$this->index++;
+		while (in_array($this->tokens[$this->index][Lexer::TYPE_OFFSET], $this->skippedTokenTypes, true)) {
+			if (!isset($this->tokens[$this->index + 1])) {
+				break;
+			}
+			$this->index++;
+		}
+	}
+
+
+	public function addEndOfLineToSkippedTokens(): void
+	{
+		$this->skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS, Lexer::TOKEN_PHPDOC_EOL];
+	}
+
+
+	public function removeEndOfLineFromSkippedTokens(): void
+	{
+		$this->skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS];
 	}
 
 	/** @phpstan-impure */
@@ -213,7 +327,7 @@ class TokenIterator
 
 	public function pushSavePoint(): void
 	{
-		$this->savePoints[] = $this->index;
+		$this->savePoints[] = [$this->index, $this->comments];
 	}
 
 
@@ -225,9 +339,9 @@ class TokenIterator
 
 	public function rollback(): void
 	{
-		$index = array_pop($this->savePoints);
-		assert($index !== null);
-		$this->index = $index;
+		$savepoint = array_pop($this->savePoints);
+		assert($savepoint !== null);
+		[$this->index, $this->comments] = $savepoint;
 	}
 
 
@@ -242,8 +356,73 @@ class TokenIterator
 			$this->currentTokenOffset(),
 			$expectedTokenType,
 			$expectedTokenValue,
-			$this->currentTokenLine()
+			$this->currentTokenLine(),
 		);
+	}
+
+	/**
+	 * Check whether the position is directly preceded by a certain token type.
+	 *
+	 * During this check TOKEN_HORIZONTAL_WS and TOKEN_PHPDOC_EOL are skipped
+	 */
+	public function hasTokenImmediatelyBefore(int $pos, int $expectedTokenType): bool
+	{
+		$tokens = $this->tokens;
+		$pos--;
+		for (; $pos >= 0; $pos--) {
+			$token = $tokens[$pos];
+			$type = $token[Lexer::TYPE_OFFSET];
+			if ($type === $expectedTokenType) {
+				return true;
+			}
+			if (!in_array($type, [
+				Lexer::TOKEN_HORIZONTAL_WS,
+				Lexer::TOKEN_PHPDOC_EOL,
+			], true)) {
+				break;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check whether the position is directly followed by a certain token type.
+	 *
+	 * During this check TOKEN_HORIZONTAL_WS and TOKEN_PHPDOC_EOL are skipped
+	 */
+	public function hasTokenImmediatelyAfter(int $pos, int $expectedTokenType): bool
+	{
+		$tokens = $this->tokens;
+		$pos++;
+		for ($c = count($tokens); $pos < $c; $pos++) {
+			$token = $tokens[$pos];
+			$type = $token[Lexer::TYPE_OFFSET];
+			if ($type === $expectedTokenType) {
+				return true;
+			}
+			if (!in_array($type, [
+				Lexer::TOKEN_HORIZONTAL_WS,
+				Lexer::TOKEN_PHPDOC_EOL,
+			], true)) {
+				break;
+			}
+		}
+
+		return false;
+	}
+
+	public function getDetectedNewline(): ?string
+	{
+		return $this->newline;
+	}
+
+	/**
+	 * Whether the given position is immediately surrounded by parenthesis.
+	 */
+	public function hasParentheses(int $startPos, int $endPos): bool
+	{
+		return $this->hasTokenImmediatelyBefore($startPos, Lexer::TOKEN_OPEN_PARENTHESES)
+			&& $this->hasTokenImmediatelyAfter($endPos, Lexer::TOKEN_CLOSE_PARENTHESES);
 	}
 
 }
