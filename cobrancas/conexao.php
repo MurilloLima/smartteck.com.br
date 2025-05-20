@@ -1,13 +1,13 @@
-<?php 
+<?php
 
 //definir fuso horário
 date_default_timezone_set('America/Sao_Paulo');
 
 //dados conexão bd local
 $servidor = 'localhost';
-$banco = 'u123776723_cobrancas';
-$usuario = 'u123776723_smartteck';
-$senha = '458621KAko#';
+$banco = 'u362965792_cobrancas';
+$usuario = 'u362965792_cobrancas';
+$senha = 'YUBMmYb7]';
 
 $url_sistema = "https://$_SERVER[HTTP_HOST]/cobrancas/";
 $url = explode("//", $url_sistema);
@@ -64,15 +64,15 @@ if($ativo_sistema != 'Sim' and $ativo_sistema != ''){ ?>
   .imgsistema_mobile{
     width:300px;
   }
-    
+
 }
 	</style>
 	<div style="text-align: center; margin-top: 100px">
-	<img src="img/bloqueio.png" class="imgsistema_mobile">	
+	<img src="img/bloqueio.png" class="imgsistema_mobile">
 	</div>
-<?php 
+<?php
 exit();
-} 
+}
 
-}	
+}
  ?>
