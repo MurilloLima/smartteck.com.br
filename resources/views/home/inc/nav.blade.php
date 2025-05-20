@@ -15,7 +15,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Serviços</a>
                     <div class="dropdown-menu fade-up m-0 caixa-alta" style="text-transform: uppercase;">
                         <a href="https://smartteck.adiantesa.com/" class="dropdown-item">Antecipação de Recebíveis</a>
-                        <a href="{{ route('login') }}" class="dropdown-item">Administrador</a>
+                        <a href="https://emprestimos.sistemashugo.com.br/painel/" class="dropdown-item">Administrador</a>
                         <a href="https://smartteck.conectar.site/lojista/site/gerenciar" class="dropdown-item">Lojista</a>
                         <a href="https://smartteck.conectar.site/convenio/site/gerenciar" class="dropdown-item">Clube de Benefícios</a>
                         <a href="https://smartteck.conectar.site/corporativo/site/gerenciar" class="dropdown-item">Corporações</a>
