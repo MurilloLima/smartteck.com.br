@@ -80,6 +80,16 @@
                     <div class="wow fadeInUp" data-wow-delay="0.2s"
                         style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         {{-- <p class="mb-4">Entre em contato e tire suas dúvidas.</p> --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (session('msg'))
+                                    <div class="alert alert-success text-center">
+                                        {{ session('msg') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
                         <form action="{{ route('contact.store') }}" method="POST">
                             @csrf
                             <div class="row g-3">
