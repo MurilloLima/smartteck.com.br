@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\MissaoController;
 use App\Http\Controllers\NoticiaController;
@@ -16,6 +17,7 @@ Route::get('about/', [HomeController::class, 'index'])->name('about');
 Route::get('noticia/', [NoticiaController::class, 'index'])->name('noticias.index');
 Route::get('noticia/{slug}', [HomeController::class, 'view'])->name('noticia.view');
 Route::get('contact/', [HomeController::class, 'contact'])->name('contact.index');
+Route::post('contact/store', [ContatoController::class, 'store'])->name('send.contact');
 
 // API
 Route::get('api/', [HomeController::class, 'api'])->name('documentacao.api');
