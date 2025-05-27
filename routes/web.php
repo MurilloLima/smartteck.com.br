@@ -16,8 +16,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('about/', [HomeController::class, 'index'])->name('about');
 Route::get('noticia/', [NoticiaController::class, 'index'])->name('noticias.index');
 Route::get('noticia/{slug}', [HomeController::class, 'view'])->name('noticia.view');
-Route::get('contact/', [HomeController::class, 'contact'])->name('contact.index');
-Route::post('contact/store', [ContatoController::class, 'store'])->name('send.contact');
+Route::get('contato/', [ContatoController::class, 'index'])->name('home.contato.index');
+Route::post('contact/store', [ContatoController::class, 'store'])->name('contact.store');
 
 // API
 Route::get('api/', [HomeController::class, 'api'])->name('documentacao.api');

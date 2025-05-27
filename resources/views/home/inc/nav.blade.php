@@ -24,10 +24,12 @@
 
                     </div>
                 </div>
-                <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contatos</a>
+                <a href="{{ route('home.contato.index') }}" class="nav-item nav-link">Contatos</a>
                 <a href="https://smartteck.com.br/cobrancas/acesso" class="nav-item nav-link">Área do cliente</a>
             </div>
-            <a href="https://web.whatsapp.com/send?phone=5599992309702" target="_blank" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Whatsapp<i
+
+
+            <a href="https://api.whatsapp.com/send/?phone=5599981781992&text&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Whatsapp<i
                     class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>

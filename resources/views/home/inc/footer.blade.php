@@ -4,7 +4,7 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Endereço</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{ $endereco->text ?? '' }}</p>
+                    {{-- <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{ $endereco->text ?? '' }}</p> --}}
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>99 99230-9702</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>contato@smartteck.com.br</p>
                     <div class="d-flex pt-2">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Horario atendimentos</h4>
-                    <p class="mb-0">08.00 AM - 17.00 AM</p>
+                    <p class="mb-0">08:00 AM - 18:00 PM</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Serviços</h4>

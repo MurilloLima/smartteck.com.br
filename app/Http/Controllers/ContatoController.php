@@ -18,7 +18,7 @@ class ContatoController extends Controller
      */
     public function index()
     {
-        //
+        return view('home.pages.contato.index');
     }
 
     /**
@@ -45,7 +45,7 @@ class ContatoController extends Controller
         $this->contato->subject = $request->subject;
         $this->contato->message = $request->message;
         $this->contato->save();
-        
+
         return redirect()->back()->with('msg', 'Contato enviado com sucesso!');
     }
 
@@ -80,6 +80,5 @@ class ContatoController extends Controller
     {
         $this->contato->destroy($request->id);
         return redirect()->back()->with('msg', 'Deletado com sucesso!');
-       
     }
 }

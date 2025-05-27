@@ -86,7 +86,6 @@
         <!-- Fact End -->
 
     </div>
-    </div>
 
     <!-- noticias Start -->
     <div class="container-xxl py-5">

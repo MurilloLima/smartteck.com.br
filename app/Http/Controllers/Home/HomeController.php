@@ -57,7 +57,7 @@ class HomeController extends Controller
     }
     public function contact()
     {
-        return view('home.pages.contact');
+        return view('home.pages.contato.index');
     }
 
     public function api()
