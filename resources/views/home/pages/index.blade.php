@@ -26,7 +26,9 @@
                         <img src="{{ asset('upload/visao/01.jpj') }}" alt="" width="140">
                         <div class="ps-4">
                             <h5 class="mb-3">Visão</h5>
-                            {{-- <p>{{ $visao->content }}</p> --}}
+                            <p style="font-size: 14px">
+                                Ser reconhecida como uma empresa concretizadora de sonhos.
+                            </p>
                             {{-- <a class="text-secondary border-bottom" href="">Read More</a> --}}
                         </div>
                     </div>
@@ -34,7 +36,8 @@
                         {{-- <img src="{{ asset('upload/missao/' . $missao->image)  }}" alt="" width="140"> --}}
                         <div class="ps-4">
                             <h5 class="mb-3">Missão</h5>
-                            {{-- <p>{{ $missao->content }}</p> --}}
+                            <p style="font-size: 14px">Transformar sonhos em realidade é o que nos motiva, proporcionar a melhor parte do sonho das
+                                pessoas</p>
                             {{-- <a class="text-secondary border-bottom" href="">Read More</a> --}}
                         </div>
                     </div>
@@ -42,7 +45,9 @@
                         {{-- <img src="{{ asset('upload/valores/' . $valores->image) }}" alt="" width="140"> --}}
                         <div class="ps-4">
                             <h5 class="mb-3">Valores</h5>
-                            {{-- <p>{{ $valores->content ?? '' }}</p> --}}
+                            <p style="font-size: 14px">
+                                Excelência profissional,respeito ao ser humano de forma integral.
+                            </p>
                             {{-- <a class="text-secondary border-bottom" href="">Read More</a> --}}
                         </div>
                     </div>
