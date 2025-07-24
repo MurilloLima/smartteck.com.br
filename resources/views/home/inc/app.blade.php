@@ -5,9 +5,10 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <!-- Favicon -->
-    <link href="{{ asset('images/50x50.ico') }}" rel="shortcut icon" type="image/x-icon" />
     <title>Smartteck - @yield('title')</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('home/images/54.png') }}" sizes="any">
+    <link rel="icon" type="image/png" href="{{ asset('home/images/54.png') }}" rel="icon">
 
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -40,14 +41,15 @@
     <!-- End WOWSlider.com HEAD section -->
 
     <style>
-     .news {
-       width: 420px;
-       float: right;
-     }
-     .news img{
-       width: 100%;
-     }
-   </style>
+        .news {
+            width: 420px;
+            float: right;
+        }
+
+        .news img {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body class="body">
